@@ -1,2 +1,3 @@
-data/
-pypmi/
+data/ppmi
+modules/
+__pycache__
