@@ -4,6 +4,7 @@ channel:
 dependencies:
 - python>=3.7
 - docker-py
+- pandas
 - pip:
   - pydicom
   - nibabel

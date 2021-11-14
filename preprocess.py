@@ -1,25 +1,33 @@
 import utils, os
+import pandas as pd
 
-def prep_data(raw_dir, out_dir):
-    
-    # Convert archive DICOM to BIDS
-    if len(os.listdir(out_dir)) == 0:
-        utils.convert_data_to_bids(raw_dir, out_dir)
-
-    # Get NIFTI file paths
-    filePaths = utils.nifti_file_paths(out_dir)
-
-    # Add variable paths
-    os.putenv("$FREESURFER_HOME", "/usr/local/freesurfer")
-    os.putenv("$SUBJECTS_DIR", "./data/subjects")
-    os.system("sudo chmod -R a+w $SUBJECTS_DIR")
-
-    # Extract volumes from patients
+def get_volumes_dataframe(patientType: str):
+    '''
+    Preprocessing pipeline for NC or PD patients.
+    Returns a dataframe
+    @patientType: NC or PD
+    '''
+    data = utils.get_mri_scans(patientType)
     subjectId = 0
-    for patient in filePaths:
-        subject = f'sub{subjectId}'
-        os.system(f"recon-all -i {patient} -s {subject} -all -qcache")
-        utils.export_volumes(os.getenv("SUBJECTS_DIR"), subjectId)
-        subjectId += 1
-    
-prep_data("./data/ppmi/original", "./data/ppmi/BIDS")
+
+    # Get brain ROI volumes from FreeSurfer
+    for mri_scan in data:
+        utils.recon_all(mri_scan, subjectId)
+        subjectId+=1
+
+    # Convert all stats to one DataFrame
+    df_list = []
+    for subId in range(subjectId):
+        subject = f"sub{subId}"
+        csvFileName = f"{subject}_stats.csv"
+        utils.convert_stats_to_csv(subId, csvFileName)
+        subjectDf = pd.read_csv(csvFileName, sep="\t")
+        df_list.append(subjectDf)
+        os.system(f"rm {csvFileName}") # remove temp file
+
+    df = pd.concat(df_list, ignore_index=True)
+    return df
+
+if __name__ == '__main__':
+    NC_DF = get_volumes_dataframe("NC")
+    PD_DF = get_volumes_dataframe("PD")
