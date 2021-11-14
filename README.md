@@ -18,8 +18,6 @@ python preprocess.py
 
 **Warning: this operation could take weeks to run if running on a single computer!**
 
-=======
-
 ## Meeting Notes
 The following log is dedicated to keep track of meetings & discussions from the authors of this project. They can be found [here](https://github.com/mohanadarafe/pd-reproducibility/blob/main/MEETING_LOGS.md).
 
