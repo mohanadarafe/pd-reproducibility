@@ -11,10 +11,12 @@ def get_volumes_dataframe(patientType: str):
     subjectId = 0
 
     # Get brain ROI volumes from FreeSurfer
-    for mri_scan in data:
-        utils.recon_all(mri_scan, subjectId)
+    for mri_scan in data[0:1]:
+        print(f"Extract volumes for subject{subjectId}")
+        utils.recon_patient(mri_scan, subjectId)
+        os.system(f"mv {subjectId}/ data/subjects")
         subjectId+=1
-
+ 
     # Convert all stats to one DataFrame
     df_list = []
     for subId in range(subjectId):

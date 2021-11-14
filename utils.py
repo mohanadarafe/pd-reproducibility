@@ -1,6 +1,11 @@
 import os, glob
+from boutiques.descriptor2func import function
 
-def recon_all(mri_scan: str, subjectId: int):
+def go_to_root_folder():
+    while 'environment.yml' not in os.listdir():
+        os.chdir("..")
+
+def recon_patient(mri_scan: str, subjectId: int):
     '''
     TODO: Change this to Boutiques/Docker
     Calls FreeSurfer's recon-all method to get brain volumes
@@ -8,7 +13,12 @@ def recon_all(mri_scan: str, subjectId: int):
     @subjectId: subject ID
     '''
     subject = f'sub{subjectId}'
-    os.system(f"recon-all -i {mri_scan} -s {subject} -all -qcache")
+    recon_all = function("zenodo.4043546")
+    recon_all(
+        input=mri_scan, 
+        subjid=str(subjectId), 
+        license="license.txt"
+    )
 
 def get_mri_scans(dataType: str) -> list:
     '''
