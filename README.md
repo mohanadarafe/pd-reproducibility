@@ -1,6 +1,7 @@
 # Parkinson Disease reproducibility
 The following project is dedicated to test methodological variability in early-Parkinson disease detection via Machine Learning.
 
+
 ## Setup
 In order to run the code, make sure you have Conda installed in your machine in order to use our environment. From there, run the following commands
 
@@ -16,6 +17,8 @@ python preprocess.py
 ```
 
 **Warning: this operation could take weeks to run if running on a single computer!**
+
+=======
 
 ## Meeting Notes
 The following log is dedicated to keep track of meetings & discussions from the authors of this project. They can be found [here](https://github.com/mohanadarafe/pd-reproducibility/blob/main/MEETING_LOGS.md).

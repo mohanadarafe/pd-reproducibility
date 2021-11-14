@@ -16,7 +16,6 @@ Additionally, we spoke to Dr.Yimimg Xiao who will collaboratw with us and provid
 - Start GitHub repository
 - Build initial pipeline to extract volumes from PPMI data
 
-
 ## November 9th, 2021
 In this meeting, we went over the progress made in the code to extract volumes from brain data. We discussed the following issues I need to address:
 
