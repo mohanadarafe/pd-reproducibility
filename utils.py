@@ -1,55 +1,31 @@
-import modules.pypmi.bids as pypmi
-import os, glob, shutil
+import os, glob
 
-def return_to_project_root_dir() -> bool:
+def recon_all(mri_scan: str, subjectId: int):
     '''
-    The following function returns the current path to project directory
+    TODO: Change this to Boutiques/Docker
+    Calls FreeSurfer's recon-all method to get brain volumes
+    @mri_scan: input NiFTi file
+    @subjectId: subject ID
     '''
-    while 'environment.yml' not in os.listdir():
-        os.chdir('..')
-        
-def nifti_file_paths(path: str):
-    '''
-    The following function returns an array containing the file paths to the NiFTI data
-    @path: SUBJECTS_DIR
-    '''
-    filePaths = []
-    try:
-        for fileName in glob.glob(f'{path}' + '/sub-*/ses-1/anat/*.nii.gz'):
-            filePaths.append(fileName)
-        
-    except FileNotFoundError:
-        print("File not found!")
-    
-    return filePaths
+    subject = f'sub{subjectId}'
+    os.system(f"recon-all -i {mri_scan} -s {subject} -all -qcache")
 
-def convert_data_to_bids(raw_dir, out_dir):
+def get_mri_scans(dataType: str) -> list:
     '''
-    The following function converts the PPIM data to BIDS format
-    @raw_dir: Directory of PPMI data
-    @out_dir: Directory to output BIDS
+    The following function returns a list of file paths to NiFTI data
+    @dataType: PD or NC
     '''
-    pypmi.convert_ppmi(raw_dir=raw_dir, 
-                        out_dir=out_dir, 
-                        ignore_bad=True,
-                        coerce_study_uids=False)
+    files = []
+    path = f"data/{dataType}/*"
 
-def export_volumes(directory: str, subId: str):
+    for filepath in glob.glob(f"{path}/*"):
+        files.append(filepath)
+
+    return files
+
+def convert_stats_to_csv(subId: int, outputPathName: str):
     '''
-    The following function converts volume stats to a csv file and places them inside the data folder.
-    directory -- SUBJECTS_DIR
-    @subId: ID of subject
+    TODO: Change this to Boutiques/Docker
+    Converts the aseg.stats file produced from recon-all to a CSV file
     '''
-    statsFileName = f"sub{subId}_volume_stats.csv"
-    subjectDir = f'sub{subId}'
-    
-    os.chdir("data/subjects")
-    if os.path.isdir(subjectDir) == 0:
-        os.mkdir(subjectDir)
-    else:
-        shutil.rmtree(subjectDir)
-        os.mkdir(subjectDir)
-    
-    os.chdir(subjectDir)
-    os.system(f"python2 $FREESURFER_HOME/bin/asegstats2table asegstats2table --subjects sub{subId} --meas volume --tablefile {statsFileName}")
-    return_to_project_root_dir()
+    os.system(f"python2 $FREESURFER_HOME/bin/asegstats2table asegstats2table --subjects sub{subId} --meas volume --tablefile {outputPathName}")

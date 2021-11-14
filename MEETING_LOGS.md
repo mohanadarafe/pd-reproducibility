@@ -16,13 +16,15 @@ Additionally, we spoke to Dr.Yimimg Xiao who will collaboratw with us and provid
 - Start GitHub repository
 - Build initial pipeline to extract volumes from PPMI data
 
-**Chat zoom**
-boutiques-prod) [glatard@douc ~]$ bosh search freesurfer
-[ INFO ] Showing 6 of 6 result(s), exluding 0 deprecated result(s).
-ID TITLE DESCRIPTION DOWNLOADS
-zenodo.1450997 FreeSurferPipelineBatch-CentOS7 FreeSurferPipelineBatch HCP pipeline 3070
-zenodo.1484547 BIDS App - FreeSurfer 6.0 BIDS App version of freesurfer 6.0, from... 3069
-zenodo.1450993 PostFreeSurferPipelineBatch-CentOS7 PostFreeSurferPipelineBatch HCP pipeline 3048
-zenodo.1450995 PreFreeSurferPipelineBatch PreFreeSurferPipelineBatch HCP pipeline 3016
-zenodo.4429271 shape_group_run This tool takes FreeSurfer aseg.mgz file... 2020
-zenodo.4043546 FreeSurfer-Recon-all Performs all, or any part of, the FreeSu... 1114 
+## November 9th, 2021
+In this meeting, we went over the progress made in the code to extract volumes from brain data. We discussed the following issues I need to address:
+
+- Compute Canada registration
+- Use Boutiques to get FreeSurfer recon-all
+- Normalization of data
+
+After acquiring Yiming's data, there is no metadata. This means that I might have to manually get the metadata from PPMI manually which might take some time (tedious task!).
+
+**Goals for the following week:**
+- Convert data to one dataframe for each class (PD, NC)
+- Register to compute canada
