@@ -16,7 +16,7 @@ def recon_patient(mri_scan: str, subjectId: int):
     recon_all = function("zenodo.4043546")
     recon_all(
         input=mri_scan, 
-        subjid=str(subjectId), 
+        subjid=subject, 
         license="license.txt"
     )
 

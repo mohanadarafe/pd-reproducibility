@@ -14,7 +14,7 @@ def get_volumes_dataframe(patientType: str):
     for mri_scan in data[0:1]:
         print(f"Extract volumes for subject{subjectId}")
         utils.recon_patient(mri_scan, subjectId)
-        os.system(f"mv {subjectId}/ data/subjects")
+        os.system(f"mv sub{subjectId}/ data/subjects/{patientType}")
         subjectId+=1
  
     # Convert all stats to one DataFrame
@@ -32,4 +32,6 @@ def get_volumes_dataframe(patientType: str):
 
 if __name__ == '__main__':
     NC_DF = get_volumes_dataframe("NC")
-    PD_DF = get_volumes_dataframe("PD")
+    NC_DF.to_csv('NC_RESULT', index=False)
+    print(NC_DF)
+    # PD_DF = get_volumes_dataframe("PD")
