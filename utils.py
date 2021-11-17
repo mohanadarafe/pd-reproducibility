@@ -1,9 +1,20 @@
 import os, glob
 from boutiques.descriptor2func import function
+from os import path
 
 def go_to_root_folder():
     while 'environment.yml' not in os.listdir():
         os.chdir("..")
+
+def prepare_data_folder():
+    NC_PATH = "data/subjects/NC"
+    PD_PATH = "data/subjects/PD"
+
+    if (not os.path.isdir(NC_PATH)):
+        os.makedirs(NC_PATH)
+
+    if (not os.path.isdir(PD_PATH)):
+        os.makedirs(PD_PATH)
 
 def recon_patient(mri_scan: str, subjectId: int):
     '''
@@ -17,7 +28,8 @@ def recon_patient(mri_scan: str, subjectId: int):
     recon_all(
         input=mri_scan, 
         subjid=subject, 
-        license="license.txt"
+        license="license.txt",
+        qcache_flag=True
     )
 
 def get_mri_scans(dataType: str) -> list:
