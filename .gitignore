@@ -1,5 +1,7 @@
 data/NC
 data/PD
 data/*.csv
+scripts
+data/json_input
 __pycache__
 license.txt

@@ -16,6 +16,10 @@ def prepare_data_folder():
     NC_PATH = "data/subjects/NC"
     PD_PATH = "data/subjects/PD"
     JSON_INPUT = "data/json_input"
+    BASH_SCRIPTS = "./scripts"
+
+    if (not os.path.isdir(BASH_SCRIPTS)):
+        os.mkdir(BASH_SCRIPTS)
 
     if (not os.path.isdir(NC_PATH)):
         os.makedirs(NC_PATH)
@@ -37,6 +41,21 @@ def create_json_input(patientType: str):
             json.dump(input_json, outfile)
         subId+=1
 
+def create_slurm_scripts():
+    '''
+    Creates a SLURM script for each NiFTI
+    '''
+    for jsonInputPath in glob.glob("data/json_input/*.json"):
+        patient_type = jsonInputPath.split("/")[2].split("_")[1]
+        with open(f"scripts/{patient_type}.sh", "w") as f:
+            f.write(f"#!/bin/bash\n")
+            f.write(f"#SBATCH --nodes=1\n")
+            f.write(f"#SBATCH --ntasks=1\n")
+            f.write(f"#SBATCH --cpus-per-task=1\n")
+            f.write(f"#SBATCH --mem=1gb\n")
+            f.write(f"#SBATCH --time=12:00:00\n\n")
+            f.write(f"bosh exec launch -s zenodo.4043546 {jsonInputPath}\n")  
+
 def prepare_input():
     '''
     Prepare the data to be created before running volumejob.sh
@@ -44,6 +63,7 @@ def prepare_input():
     prepare_data_folder()
     create_json_input("NC")
     create_json_input("PD")
+    create_slurm_scripts()
 
 def recon_patient(mri_scan: str, subjectId: int):
     '''
