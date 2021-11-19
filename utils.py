@@ -35,11 +35,12 @@ def create_json_input(patientType: str):
     The following function creates the JSON input files for Boutques recon-all
     '''
     subId = 0
-    for mri in glob.glob(f"data/{patientType}/*/*"):
-        input_json = {"license": "license.txt", "subjid": f"{patientType}_sub{subId}", "input": mri, "qcache_flag": True}
-        with open(f"data/json_input/{patientType}_sub{subId}_json.json", "w") as outfile:
-            json.dump(input_json, outfile)
-        subId+=1
+    if (len(glob.glob(f"data/{patientType}/*/*"))>0):
+        for mri in glob.glob(f"data/{patientType}/*/*"):
+            input_json = {"license": "license.txt", "subjid": f"{patientType}_sub{subId}", "input": mri, "qcache_flag": True}
+            with open(f"data/json_input/{patientType}_sub{subId}_json.json", "w") as outfile:
+                json.dump(input_json, outfile)
+            subId+=1
 
 def create_slurm_scripts():
     '''
@@ -51,9 +52,9 @@ def create_slurm_scripts():
             f.write(f"#!/bin/bash\n")
             f.write(f"#SBATCH --nodes=1\n")
             f.write(f"#SBATCH --ntasks=1\n")
-            f.write(f"#SBATCH --cpus-per-task=1\n")
-            f.write(f"#SBATCH --mem=1gb\n")
-            f.write(f"#SBATCH --time=12:00:00\n\n")
+            f.write(f"#SBATCH --cpus-per-task=2\n")
+            f.write(f"#SBATCH --mem=16gb\n")
+            f.write(f"#SBATCH --time=20:00:00\n\n")
             f.write(f"bosh exec launch -s zenodo.4043546 {jsonInputPath}\n")  
 
 def prepare_input():
