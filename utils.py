@@ -11,12 +11,20 @@ def go_to_root_folder():
 
 def prepare_data_folder():
     '''
-    The following function creates the necessary folders
+    The following function creates the necessary folders in case they are missing
     '''
+    ML_PATH = "./ml"
+    DATA_PATH = "./data"
+    BASH_SCRIPTS = "./scripts"
     NC_PATH = "data/subjects/NC"
     PD_PATH = "data/subjects/PD"
     JSON_INPUT = "data/json_input"
-    BASH_SCRIPTS = "./scripts"
+
+    if (not os.path.isdir(ML_PATH)):
+        os.mkdir(ML_PATH)
+
+    if (not os.path.isdir(DATA_PATH)):
+        os.mkdir(DATA_PATH)
 
     if (not os.path.isdir(BASH_SCRIPTS)):
         os.mkdir(BASH_SCRIPTS)
@@ -95,7 +103,7 @@ def get_mri_scans(dataType: str) -> list:
 
     return files
 
-def get_volumes_from_freesurfer():
+def move_volume_stats_from_job():
     '''
     Moves all stats files from recon-all to proper location
     @patientType: NC or PD

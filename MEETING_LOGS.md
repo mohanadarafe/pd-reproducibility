@@ -28,3 +28,12 @@ After acquiring Yiming's data, there is no metadata. This means that I might hav
 **Goals for the following week:**
 - Convert data to one dataframe for each class (PD, NC)
 - Register to compute canada
+
+## November 16th, 2021
+In this meeting, we showed progress in the code having developed a preprocessing pipeline to execute a job in Compute Canada to extract volumes for all patients. Also, we talked about how I will pick the sample size of each classes (NC, PD). 
+
+For the sampling of data, I am yet to decide. In terms of the COMP691 project, it would be best to match the dataset to the paper we are replicating and keep it simple. 
+
+**Goals for the following week:**
+- Execute FreeSurfer volume extraction jobs in Compute Canada
+- Start ML pipeline
