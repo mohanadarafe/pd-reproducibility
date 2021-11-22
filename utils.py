@@ -61,7 +61,7 @@ def create_slurm_scripts():
             f.write(f"#SBATCH --nodes=1\n")
             f.write(f"#SBATCH --ntasks=1\n")
             f.write(f"#SBATCH --cpus-per-task=2\n")
-            f.write(f"#SBATCH --mem=16gb\n")
+            f.write(f"#SBATCH --mem=32gb\n")
             f.write(f"#SBATCH --time=20:00:00\n\n")
             f.write(f"bosh exec launch -s zenodo.4043546 {jsonInputPath}\n")  
 
@@ -106,7 +106,6 @@ def get_mri_scans(dataType: str) -> list:
 def move_volume_stats_from_job():
     '''
     Moves all stats files from recon-all to proper location
-    @patientType: NC or PD
     '''
     for subFolderName in glob.glob("*_sub*"):
         patient_type = subFolderName[0:2]
@@ -114,8 +113,8 @@ def move_volume_stats_from_job():
         os.mkdir(f"data/subjects/{patient_type}/{folder_name}")
         os.system(f"mv {subFolderName}/stats/aseg.stats data/subjects/{patient_type}/{folder_name}")
 
-def convert_stats_to_csv(subId: int, outputPathName: str):
+def convert_stats_to_csv(inputStatsFile: int, outputCsvFile: str):
     '''
     Converts the aseg.stats file produced from recon-all to a CSV file
     '''
-    os.system(f"python2 $FREESURFER_HOME/bin/asegstats2table asegstats2table --subjects sub{subId} --meas volume --tablefile {outputPathName}")
+    os.system(f"singularity exec free asegstats2table -i {inputStatsFile} --meas volume --tablefile {outputCsvFile}")

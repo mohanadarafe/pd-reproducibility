@@ -18,7 +18,7 @@ def convert_stats_to_df(patientType: str):
     # Convert stats to CSV files and create one large dataframe
     for pathToStats in glob.glob(f"data/subjects/{patientType}/*/*.stats"):
         csvFileName = f"sub{subId}_stats.csv"
-        utils.convert_stats_to_csv(subId, csvFileName)
+        utils.convert_stats_to_csv(pathToStats, csvFileName)
         subjectDf = pd.read_csv(csvFileName, sep="\t")
         df_list.append(subjectDf)
         os.system(f"rm {csvFileName}") # remove temp file
