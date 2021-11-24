@@ -37,3 +37,11 @@ For the sampling of data, I am yet to decide. In terms of the COMP691 project, i
 **Goals for the following week:**
 - Execute FreeSurfer volume extraction jobs in Compute Canada
 - Start ML pipeline
+
+## November 22nd, 2021
+In this meeting, we discussed the progrssions of the Compute Canada job. On this date, all 216 patients scans are being ran in Compute Canada. Once the volumes are extracted, the data will be used to start the machine learning pipeline. Over the last week, I wrote code to start the ML pipeline in a notebook. The pipeline will include conversion from CSV to DF, training models, normalize data and making predictions.
+
+**Goals for the following week:**
+- Download metadata from PPMI to get scanner types
+- Write methods to normalize data
+- Continue ML pipeline

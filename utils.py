@@ -108,7 +108,6 @@ def get_mri_scans(dataType: str) -> list:
 def move_volume_stats_from_job():
     '''
     Moves all stats files from recon-all to proper location
-    @patientType: NC or PD
     '''
     for subFolderName in glob.glob("*_sub*"):
         patient_type = subFolderName[0:2]
