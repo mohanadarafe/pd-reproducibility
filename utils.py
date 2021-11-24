@@ -43,12 +43,13 @@ def create_json_input(patientType: str):
     The following function creates the JSON input files for Boutques recon-all
     '''
     subId = 0
-    if (len(glob.glob(f"data/{patientType}/*/*"))>0):
-        for mri in glob.glob(f"data/{patientType}/*/*"):
-            input_json = {"license": "license.txt", "subjid": f"{patientType}_sub{subId}", "input": mri, "qcache_flag": True}
-            with open(f"data/json_input/{patientType}_sub{subId}_json.json", "w") as outfile:
-                json.dump(input_json, outfile)
-            subId+=1
+    for mri in glob.glob(f"data/{patientType}/*/*"):
+        input_json = {"license": "license.txt", "subjid": f"{patientType}_sub{subId}", "input": mri, "qcache_flag": True}
+        with open(f"data/json_input/{patientType}_sub{subId}_json.json", "w") as outfile:
+            json.dump(input_json, outfile)
+        subId += 1
+    
+    return subId
 
 def create_slurm_scripts():
     '''
@@ -61,7 +62,7 @@ def create_slurm_scripts():
             f.write(f"#SBATCH --nodes=1\n")
             f.write(f"#SBATCH --ntasks=1\n")
             f.write(f"#SBATCH --cpus-per-task=2\n")
-            f.write(f"#SBATCH --mem=16gb\n")
+            f.write(f"#SBATCH --mem=32gb\n")
             f.write(f"#SBATCH --time=20:00:00\n\n")
             f.write(f"bosh exec launch -s zenodo.4043546 {jsonInputPath}\n")  
 
@@ -72,7 +73,8 @@ def prepare_input():
     prepare_data_folder()
     create_json_input("NC")
     create_json_input("PD")
-    create_slurm_scripts()
+    create_slurm_scripts("NC")
+    create_slurm_scripts("PD")
 
 def recon_patient(mri_scan: str, subjectId: int):
     '''
@@ -111,11 +113,14 @@ def move_volume_stats_from_job():
     for subFolderName in glob.glob("*_sub*"):
         patient_type = subFolderName[0:2]
         folder_name = subFolderName.split("_")[1]
-        os.mkdir(f"data/subjects/{patient_type}/{folder_name}")
-        os.system(f"mv {subFolderName}/stats/aseg.stats data/subjects/{patient_type}/{folder_name}")
 
-def convert_stats_to_csv(subId: int, outputPathName: str):
+        if (not os.path.isdir(f"data/subjects/{patient_type}/{folder_name}")):
+            os.mkdir(f"data/subjects/{patient_type}/{folder_name}")
+
+        os.system(f"cp {subFolderName}/stats/aseg.stats data/subjects/{patient_type}/{folder_name}")
+        
+def convert_stats_to_csv(inputStatsFile: int, outputCsvFile: str):
     '''
     Converts the aseg.stats file produced from recon-all to a CSV file
     '''
-    os.system(f"python2 $FREESURFER_HOME/bin/asegstats2table asegstats2table --subjects sub{subId} --meas volume --tablefile {outputPathName}")
+    os.system(f"singularity exec freesurfer-freesurfer-7.1.1.simg asegstats2table -i {inputStatsFile} --meas volume --tablefile {outputCsvFile}")
