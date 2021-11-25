@@ -12,16 +12,10 @@ def convert_stats_to_df(patientType: str):
     df_list = []
     subId = 0
 
-    # Move all sub stats files to data folder
-    print("Copying stats files over to data folder")
-    utils.move_volume_stats_from_job()
-
     # Convert stats to CSV files and create one large dataframe
     for pathToStats in glob.glob(f"data/subjects/{patientType}/*/*.stats"):
-        print(f"Working on: {pathToStats}")
-        csvFileName = f"sub{subId}_stats.csv"
+        csvFileName = f"{subId}_stats.csv"
         utils.convert_stats_to_csv(pathToStats, csvFileName)
-        print("Converted stats file to CSV")
         subjectDf = pd.read_csv(csvFileName, sep="\t")
         df_list.append(subjectDf)
         os.system(f"rm {csvFileName}") # remove temp file

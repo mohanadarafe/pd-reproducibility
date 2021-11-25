@@ -105,21 +105,8 @@ def get_mri_scans(dataType: str) -> list:
 
     return files
 
-def move_volume_stats_from_job():
-    '''
-    Moves all stats files from recon-all to proper location
-    '''
-    for subFolderName in glob.glob("*_sub*"):
-        patient_type = subFolderName[0:2]
-        folder_name = subFolderName.split("_")[1]
-
-        if (not os.path.isdir(f"data/subjects/{patient_type}/{folder_name}")):
-            os.mkdir(f"data/subjects/{patient_type}/{folder_name}")
-
-        os.system(f"cp {subFolderName}/stats/aseg.stats data/subjects/{patient_type}/{folder_name}")
-        
-def convert_stats_to_csv(inputStatsFile: int, outputCsvFile: str):
+def convert_stats_to_csv(statsFile: str, outputCsvFile: str):
     '''
     Converts the aseg.stats file produced from recon-all to a CSV file
     '''
-    os.system(f"singularity exec freesurfer-freesurfer-7.1.1.simg asegstats2table -i {inputStatsFile} --meas volume --tablefile {outputCsvFile}")
+    os.system(f"singularity exec freesurfer-freesurfer-7.1.1.simg asegstats2table -i {statsFile} --meas volume --tablefile {outputCsvFile}")
