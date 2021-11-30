@@ -10,10 +10,11 @@ conda env create --name reproducibility --file=environment.yml
 conda activate reproducibility
 ```
 
-Once you have your environment setup, you can run the preprocess pipeline using:
+Once you have your environment setup, you can run the machine learning pipeline using:
 
 ```
-python preprocess.py
+cd ml
+python run.py
 ```
 
 **Warning: this operation could take weeks to run if running on a single computer!**
