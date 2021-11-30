@@ -45,3 +45,74 @@ In this meeting, we discussed the progrssions of the Compute Canada job. On this
 - Download metadata from PPMI to get scanner types
 - Write methods to normalize data
 - Continue ML pipeline
+
+**Additional note:**
+
+I need to use the correct volumes from FreeSurfer. The following lists are a breakdown of what I have, what I need and what is available to me.
+
+ROI's missing
+-------------------------------
+- Midbrain
+- Pons
+- Posterior putamen
+- SCP
+- Insula
+- Precentral cortex
+- Insular cortex
+
+ROIs present (currently using)
+-------------------------------
+- Putamen
+- Caudate
+- Thalamus
+- Pallidum
+- CerebralWhiteMatterVol
+- 3rd and 4th ventricles
+
+ROI's available from FreeSurfer
+-------------------------------
+- Left-Lateral-Ventricle
+- Left-Inf-Lat-Vent
+- Left-Cerebellum-White-Matter
+- Left-Cerebellum-Cortex
+- Left-Thalamus
+- Left-Caudate
+- Left-Putamen
+- Left-Pallidum
+- 3rd-Ventricle
+- 4th-Ventricle
+- Brain-Stem
+- Left-Hippocampus
+- Left-Amygdala
+- CSF
+- Left-Accumbens-area
+- Left-VentralDC
+- Left-vessel
+- Left-choroid-plexus
+- Right-Lateral-Ventricle
+- Right-Inf-Lat-Vent
+- Right-Cerebellum-White-Matter
+- Right-Cerebellum-Cortex
+- Right-Thalamus
+- Right-Caudate
+- Right-Putamen
+- Right-Pallidum
+- Right-Hippocampus
+- Right-Amygdala
+- Right-Accumbens-area
+- Right-VentralDC
+- Right-vessel
+- Right-choroid-plexus
+- th-Ventricle
+- WM-hypointensities
+- Left-WM-hypointensities
+- Right-WM-hypointensities
+- non-WM-hypointensities
+- Left-non-WM-hypointensities
+- Right-non-WM-hypointensities
+- Optic-Chiasm
+- CC_Posterior
+- CC_Mid_Posterior
+- CC_Central
+- CC_Mid_Anterior
+- CC_Anterior

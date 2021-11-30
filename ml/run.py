@@ -6,8 +6,6 @@ ROI = [
       "Right-Caudate", "Left-Caudate", 
       "Right-Thalamus-Proper", "Left-Thalamus-Proper", 
       "Left-Pallidum", "Right-Pallidum", 
-      "Left-Cerebellum-Cortex", "Right-Cerebellum-Cortex", "lhCortexVol", "rhCortexVol", "CortexVol",
-      "Left-Cerebellum-White-Matter", "Right-Cerebellum-White-Matter",
       "CerebralWhiteMatterVol", 
       "3rd-Ventricle", "4th-Ventricle"
 ]
