@@ -11,7 +11,6 @@ ROI = [
 ]
 X, y = preprocess.get_data("volumes.csv", ROI, "combine")
 
-models.svm(X, y, "linear", 0.7, preprocess.normalize1)
-models.svm(X, y, "rbf", 0.7, preprocess.normalize1)
-models.logistic_regression(X, y, 0.7, preprocess.normalize1)
-models.random_forest(X, y, 0.7, preprocess.normalize1)
+models.svm(X, y, 0.7, preprocess.normalize1)
+# models.logistic_regression(X, y, 0.7, preprocess.normalize1)
+# models.random_forest(X, y, 0.7, preprocess.normalize1)
