@@ -22,8 +22,8 @@ def login():
     email='//*[@id="userEmail"]'
     password = '//*[@id="userPassword"]'
     loginButton = '//button[text()="LOGIN"]'
-    enterData(email, "mohanadarafework@gmail.com")
-    enterData(password, "MohanadKhadijaMK")
+    enterData(email, "")
+    enterData(password, "")
 
 def fillForm(subjectId):
     subId='//*[@name="subjectId"]'
