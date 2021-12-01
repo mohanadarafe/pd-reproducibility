@@ -1,3 +1,12 @@
 #!/bin/bash
 
-ls data/json_input/*.json | parallel --jobs 32 bosh exec launch -s zenodo.4043546 ./{}
+# Load up virtual environemnt
+source ENV/bin/activate
+
+# Loop through files and execute SLURM jobs
+FILES="scripts/*.sh"
+for freesurfer_script in $FILES
+do
+        echo "Submitting job "$freesurfer_script
+        sbatch $freesurfer_script
+done
