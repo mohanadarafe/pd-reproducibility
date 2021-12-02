@@ -40,8 +40,28 @@ def normalize1(data, mean, std):
 
     return df.values, mean, std
             
-def normalize2():
-    print("TODO - Unimplemented")
+def normalize2(data, ROI):
+    df = pd.DataFrame(data=data)
+    df_with_subjects = get_data("test.csv", ROI, "combine", getDf=True)
+    metadata_df = utils.parse_metadata()
+    merged_df = pd.merge(df_with_subjects, metadata_df, on=["subjectId"])
+    
+    stats = {}
+    for scanner in merged_df["scannerType"].unique():
+        mean, std = utils.get_mean_and_stats(merged_df.drop("subjectId",1), scanner)
+        stats[scanner] = {
+            "mean": mean.to_dict(),
+            "std": std.to_dict()
+        }
+        
+    for index in merged_df.index:
+        rowInfo = merged_df.iloc[index]
+        scanner = rowInfo["scannerType"]
+        mean = list(stats[scanner]["mean"].values())
+        std = list(stats[scanner]["std"].values())
+        df.iloc[index] = (df.iloc[index]-mean)/std
+
+    return df
 
 def split_data(X, y, training_split):
     '''

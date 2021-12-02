@@ -7,6 +7,8 @@ dependencies:
 - pandas
 - scikit-learn
 - selenium
+- beautifulsoup4
+- lxml
 - pip
 - pip:
   - boutiques

@@ -1,5 +1,7 @@
 import pandas as pd
 import numpy as np
+import glob
+from bs4 import BeautifulSoup as bs
 
 def remove_unwanted_columns(df, ROI):
     '''
@@ -40,3 +42,27 @@ def convert_Y(data):
     data = np.where(data == "PD", 1, data)
     data = np.where(data == "NC", 0, data)
     return data.astype(int)
+
+def get_mean_and_stats(df, scannerType):
+    queryDf = df.loc[((df['scannerType'] == scannerType) & (df['class']  == 'NC'))]
+    mean = queryDf.mean()
+    std = queryDf.std()
+    return mean, std
+
+def parse_metadata():
+    df = pd.DataFrame(columns=["subjectId", "scannerType"])
+    for index, mdFilePath in enumerate(glob.glob("../data/metadata/*")):
+        with open(mdFilePath, "r") as file:
+            content = file.readlines()
+            content = "".join(content)
+            bs_content = bs(content, "lxml")
+            subjectId = bs_content.find("subject").find("subjectidentifier").getText()
+            scannerType = bs_content.find_all("protocol", attrs={'term':'Manufacturer'})[0].string
+            model = bs_content.find_all("protocol", attrs={'term':'Mfg Model'})[0].string
+            df = df.append({
+                "subjectId": int(subjectId),
+                "scannerType": f"{scannerType} {model}"
+            }, ignore_index=True)
+            df["subjectId"] = df["subjectId"].astype('int64')
+
+    return df       
