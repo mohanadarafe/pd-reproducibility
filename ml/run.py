@@ -1,6 +1,6 @@
 import models, preprocess
 
-DATA = "volumes.csv"
+DATA_FILE = "volumes.csv"
 ROI = [
       "subjectId", "class",
       "Left-Putamen", "Right-Putamen", 
@@ -10,8 +10,15 @@ ROI = [
       "CerebralWhiteMatterVol", 
       "3rd-Ventricle", "4th-Ventricle"
 ]
-X, y = preprocess.get_data(DATA, ROI, "combine")
+HEURISTIC = "combine"
 
-models.svm(X, y, 0.7, preprocess.normalize1)
-# models.logistic_regression(X, y, 0.7, preprocess.normalize1)
-# models.random_forest(X, y, 0.7, preprocess.normalize1)
+X, y = preprocess.get_data(DATA_FILE, ROI, HEURISTIC)
+
+models.svm(X, y, 0.7, preprocess.normalize1, DATA_FILE, ROI, heuristic=HEURISTIC)
+# models.svm(X, y, 0.7, preprocess.normalize2, DATA_FILE, ROI, heuristic=HEURISTIC)
+
+# models.logistic_regression(X, y, 0.7, preprocess.normalize1, DATA_FILE, ROI, heuristic=HEURISTIC)
+# models.logistic_regression(X, y, 0.7, preprocess.normalize2, DATA_FILE, ROI, heuristic=HEURISTIC)
+
+# models.random_forest(X, y, 0.7, preprocess.normalize1, DATA_FILE, ROI, heuristic=HEURISTIC)
+# models.random_forest(X, y, 0.7, preprocess.normalize2, DATA_FILE, ROI, heuristic=HEURISTIC)
