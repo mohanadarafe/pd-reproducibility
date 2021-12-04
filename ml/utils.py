@@ -1,7 +1,14 @@
 import pandas as pd
 import numpy as np
-import glob
+import glob, os, json
+from os import path
 from bs4 import BeautifulSoup as bs
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import balanced_accuracy_score
+from sklearn.metrics import roc_auc_score
+from sklearn.metrics import plot_roc_curve
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import f1_score
 
 def remove_unwanted_columns(df, ROI):
     '''
@@ -9,7 +16,7 @@ def remove_unwanted_columns(df, ROI):
     '''
     for column in df.columns:
         if column not in ROI:
-            df = df.drop(column, 1)
+            df = df.drop(columns=column)
     return df
 
 def reorder_df(df, area):
@@ -65,4 +72,70 @@ def parse_metadata():
             }, ignore_index=True)
             df["subjectId"] = df["subjectId"].astype('int64')
 
-    return df       
+    return df 
+
+def performance_report(performanceDict, model, modelType, reportKey, iteration, X_train, X_test, y_train, y_test):
+    y_train_predict = model.predict(X_train)
+    y_test_predict = model.predict(X_test)
+
+    # Accuracy
+    train_accuracy = accuracy_score(y_train, y_train_predict)
+    test_accuracy = accuracy_score(y_test, y_test_predict)
+
+    # F1
+    train_f1 = f1_score(y_train, y_train_predict)
+    test_f1 = f1_score(y_test, y_test_predict)
+
+    # BA
+    train_ba = balanced_accuracy_score(y_train, y_train_predict)
+    test_ba = balanced_accuracy_score(y_test, y_test_predict)
+
+    # ROC AUC
+    train_auc = roc_auc_score(y_train, y_train_predict)
+    test_auc = roc_auc_score(y_test, y_test_predict)
+#     roc_plot = plot_roc_curve(model, X_test, y_test).figure.savefig(f"{modelType}/roc.png")
+
+    # Sensitivity & Specificity
+    tn_train, fp_train, fn_train, tp_train = confusion_matrix(y_train, y_train_predict).ravel()
+    tn_test, fp_test, fn_test, tp_test = confusion_matrix(y_test, y_test_predict).ravel()
+
+    specificity_train = tn_train / (tn_train + fp_train)
+    specificity_test = tn_test / (tn_test + fp_test)
+
+    sensitivity_train = tp_train / (tp_train + fn_train)
+    sensitivity_test = tp_test / (tp_test + fn_test)
+
+    normalization = "Normalization 1" if reportKey.split("_")[-1] == "norm1" else "Normalization 2"
+ 
+    modelInfo = {
+        "model": modelType,
+        "normalization": normalization,
+        "parameters": model.best_params_,
+        "iteration": iteration
+    }
+
+    trainMetrics = {
+        "accuracy": train_accuracy,
+        "f1_score": train_f1,
+        "balanced_accuracy": train_ba,
+        "auc": train_auc,
+        "sensitivity": specificity_train,
+        "specificity": specificity_train
+    }
+
+    testMetrics = {
+        "accuracy": test_accuracy,
+        "f1_score": test_f1,
+        "balanced_accuracy": test_ba,
+        "auc": test_auc,
+        "sensitivity": sensitivity_test,
+        "specificity": specificity_test
+    }
+
+    performanceDict[iteration] = {
+        "modelInfo": modelInfo,
+        "train": trainMetrics,
+        "test": testMetrics
+    }
+
+    return performanceDict

@@ -12,13 +12,15 @@ ROI = [
 ]
 HEURISTIC = "combine"
 
-X, y = preprocess.get_data(DATA_FILE, ROI, HEURISTIC)
+df = preprocess.get_data(DATA_FILE, ROI, HEURISTIC)
 
-models.svm(X, y, 0.7, preprocess.normalize1, DATA_FILE, ROI, heuristic=HEURISTIC)
-# models.svm(X, y, 0.7, preprocess.normalize2, DATA_FILE, ROI, heuristic=HEURISTIC)
+models.svm(df, preprocess.normalize1, "norm1", DATA_FILE, ROI, heuristic="combine")
 
-# models.logistic_regression(X, y, 0.7, preprocess.normalize1, DATA_FILE, ROI, heuristic=HEURISTIC)
-# models.logistic_regression(X, y, 0.7, preprocess.normalize2, DATA_FILE, ROI, heuristic=HEURISTIC)
+# models.svm(df, preprocess.normalize1, "norm1", DATA_FILE, ROI, heuristic="combine")
+# models.svm(df, preprocess.normalize2, "norm2", DATA_FILE, ROI, heuristic="combine")
 
-# models.random_forest(X, y, 0.7, preprocess.normalize1, DATA_FILE, ROI, heuristic=HEURISTIC)
-# models.random_forest(X, y, 0.7, preprocess.normalize2, DATA_FILE, ROI, heuristic=HEURISTIC)
+# models.logistic_regression(df, preprocess.normalize1, "norm1", DATA_FILE, ROI, heuristic="combine")
+# models.logistic_regression(df, preprocess.normalize2, "norm2", DATA_FILE, ROI, heuristic="combine")
+
+# models.random_forest(df, preprocess.normalize1, "norm1", DATA_FILE, ROI, heuristic="combine")
+# models.random_forest(df, preprocess.normalize2, "norm2", DATA_FILE, ROI, heuristic="combine")

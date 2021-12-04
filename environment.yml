@@ -6,6 +6,8 @@ dependencies:
 - docker-py
 - pandas
 - scikit-learn
+- matplotlib
+- joblib
 - selenium
 - beautifulsoup4
 - lxml
