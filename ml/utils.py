@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup as bs
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import balanced_accuracy_score
 from sklearn.metrics import roc_auc_score
-from sklearn.metrics import plot_roc_curve
+from sklearn.metrics import recall_score
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import f1_score
 
@@ -102,8 +102,8 @@ def performance_report(performanceDict, model, modelType, reportKey, iteration, 
     specificity_train = tn_train / (tn_train + fp_train)
     specificity_test = tn_test / (tn_test + fp_test)
 
-    sensitivity_train = tp_train / (tp_train + fn_train)
-    sensitivity_test = tp_test / (tp_test + fn_test)
+    sensitivity_train = recall_score(y_train, y_train_predict)
+    sensitivity_test = recall_score(y_test, y_test_predict)
 
     normalization = "Normalization 1" if reportKey.split("_")[-1] == "norm1" else "Normalization 2"
  
@@ -119,7 +119,7 @@ def performance_report(performanceDict, model, modelType, reportKey, iteration, 
         "f1_score": train_f1,
         "balanced_accuracy": train_ba,
         "auc": train_auc,
-        "sensitivity": specificity_train,
+        "sensitivity": sensitivity_train,
         "specificity": specificity_train
     }
 

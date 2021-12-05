@@ -87,11 +87,11 @@ def train(clf, train_index, test_index, X, y, normalize, columns, performanceDic
         
     print("Done normalizing data")
         
-    print("Fitting model...")
+    print(f"Fitting {modelType} model #{iteration}...")
     model = clf.fit(X_train_normalized, y_train)
     print("Done fitting model")
     
-    print("Computing results metrics...")
+    print(f"Computing results metrics for {modelType} model #{iteration}...")
     utils.performance_report(performanceDict, model, modelType, reportKey, iteration, X_train_normalized, X_test_normalized, y_train, y_test)
     print("Done computing results metrics\n")
 
