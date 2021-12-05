@@ -74,7 +74,8 @@ def parse_metadata():
 
     return df 
 
-def performance_report(performanceDict, model, modelType, reportKey, iteration, X_train, X_test, y_train, y_test):
+def performance_report(model, modelType, reportKey, iteration, X_train, X_test, y_train, y_test):
+    performanceDict = {}
     y_train_predict = model.predict(X_train)
     y_test_predict = model.predict(X_test)
 
@@ -132,7 +133,7 @@ def performance_report(performanceDict, model, modelType, reportKey, iteration, 
         "specificity": specificity_test
     }
 
-    performanceDict[iteration] = {
+    performanceDict = {
         "modelInfo": modelInfo,
         "train": trainMetrics,
         "test": testMetrics

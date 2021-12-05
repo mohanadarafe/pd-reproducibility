@@ -1,0 +1,172 @@
+[
+    [
+        {
+            "modelInfo": {
+                "model": "SVM",
+                "normalization": "Normalization 1",
+                "parameters": {
+                    "C": 1.0,
+                    "gamma": 0.01,
+                    "kernel": "linear"
+                },
+                "iteration": 0
+            },
+            "train": {
+                "accuracy": 0.7102803738317757,
+                "f1_score": 0.8306010928961748,
+                "balanced_accuracy": 0.5,
+                "auc": 0.5,
+                "sensitivity": 1.0,
+                "specificity": 0.0
+            },
+            "test": {
+                "accuracy": 0.7037037037037037,
+                "f1_score": 0.8260869565217391,
+                "balanced_accuracy": 0.5,
+                "auc": 0.5,
+                "sensitivity": 1.0,
+                "specificity": 0.0
+            }
+        },
+        {
+            "modelInfo": {
+                "model": "SVM",
+                "normalization": "Normalization 1",
+                "parameters": {
+                    "C": 1.0,
+                    "gamma": 0.01,
+                    "kernel": "linear"
+                },
+                "iteration": 1
+            },
+            "train": {
+                "accuracy": 0.7037037037037037,
+                "f1_score": 0.8260869565217391,
+                "balanced_accuracy": 0.5,
+                "auc": 0.5,
+                "sensitivity": 1.0,
+                "specificity": 0.0
+            },
+            "test": {
+                "accuracy": 0.7102803738317757,
+                "f1_score": 0.8306010928961748,
+                "balanced_accuracy": 0.5,
+                "auc": 0.5,
+                "sensitivity": 1.0,
+                "specificity": 0.0
+            }
+        },
+        {
+            "modelInfo": {
+                "model": "SVM",
+                "normalization": "Normalization 1",
+                "parameters": {
+                    "C": 1.0,
+                    "gamma": 0.01,
+                    "kernel": "linear"
+                },
+                "iteration": 2
+            },
+            "train": {
+                "accuracy": 0.7102803738317757,
+                "f1_score": 0.8306010928961748,
+                "balanced_accuracy": 0.5,
+                "auc": 0.5,
+                "sensitivity": 1.0,
+                "specificity": 0.0
+            },
+            "test": {
+                "accuracy": 0.7037037037037037,
+                "f1_score": 0.8260869565217391,
+                "balanced_accuracy": 0.5,
+                "auc": 0.5,
+                "sensitivity": 1.0,
+                "specificity": 0.0
+            }
+        },
+        {
+            "modelInfo": {
+                "model": "SVM",
+                "normalization": "Normalization 1",
+                "parameters": {
+                    "C": 1.0,
+                    "gamma": 0.01,
+                    "kernel": "linear"
+                },
+                "iteration": 3
+            },
+            "train": {
+                "accuracy": 0.7037037037037037,
+                "f1_score": 0.8260869565217391,
+                "balanced_accuracy": 0.5,
+                "auc": 0.5,
+                "sensitivity": 1.0,
+                "specificity": 0.0
+            },
+            "test": {
+                "accuracy": 0.7102803738317757,
+                "f1_score": 0.8306010928961748,
+                "balanced_accuracy": 0.5,
+                "auc": 0.5,
+                "sensitivity": 1.0,
+                "specificity": 0.0
+            }
+        },
+        {
+            "modelInfo": {
+                "model": "SVM",
+                "normalization": "Normalization 1",
+                "parameters": {
+                    "C": 1.0,
+                    "gamma": 0.01,
+                    "kernel": "linear"
+                },
+                "iteration": 4
+            },
+            "train": {
+                "accuracy": 0.7102803738317757,
+                "f1_score": 0.8306010928961748,
+                "balanced_accuracy": 0.5,
+                "auc": 0.5,
+                "sensitivity": 1.0,
+                "specificity": 0.0
+            },
+            "test": {
+                "accuracy": 0.7037037037037037,
+                "f1_score": 0.8260869565217391,
+                "balanced_accuracy": 0.5,
+                "auc": 0.5,
+                "sensitivity": 1.0,
+                "specificity": 0.0
+            }
+        },
+        {
+            "modelInfo": {
+                "model": "SVM",
+                "normalization": "Normalization 1",
+                "parameters": {
+                    "C": 1.0,
+                    "gamma": 0.01,
+                    "kernel": "linear"
+                },
+                "iteration": 5
+            },
+            "train": {
+                "accuracy": 0.7037037037037037,
+                "f1_score": 0.8260869565217391,
+                "balanced_accuracy": 0.5,
+                "auc": 0.5,
+                "sensitivity": 1.0,
+                "specificity": 0.0
+            },
+            "test": {
+                "accuracy": 0.7102803738317757,
+                "f1_score": 0.8306010928961748,
+                "balanced_accuracy": 0.5,
+                "auc": 0.5,
+                "sensitivity": 1.0,
+                "specificity": 0.0
+            }
+        }
+    ]
+]

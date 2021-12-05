@@ -61,8 +61,9 @@ def normalize2(df):
         
     return df_no_id.values
 
-def train(clf, train_index, test_index, X, y, normalize, columns, performanceDict, modelType, reportKey, iteration):
+def train(clf, train_index, test_index, X, y, normalize, columns, modelType, reportKey, iteration):
     print(f"=================Iteration #{iteration}=================")
+    performanceDict = {}
         
     # Get fold data train/test sets
     X_train, X_test = X[train_index], X[test_index]
@@ -92,7 +93,7 @@ def train(clf, train_index, test_index, X, y, normalize, columns, performanceDic
     print("Done fitting model")
     
     print(f"Computing results metrics for {modelType} model #{iteration}...")
-    utils.performance_report(performanceDict, model, modelType, reportKey, iteration, X_train_normalized, X_test_normalized, y_train, y_test)
+    performanceDict = utils.performance_report(model, modelType, reportKey, iteration, X_train_normalized, X_test_normalized, y_train, y_test)
     print("Done computing results metrics\n")
 
     return performanceDict
@@ -100,10 +101,10 @@ def train(clf, train_index, test_index, X, y, normalize, columns, performanceDic
 def model(df, modelType, reportKey, normalize, paramGrid, dataFile, ROI, heuristic=None):
     print(f"\n======================Running {modelType} with the following parameters======================\nNormalization: {normalize.__name__}\nParam Grid: {paramGrid}\nData: {dataFile}\nROI: {ROI}")
 
+    performance = []
     if not os.path.isdir(modelType):
         os.mkdir(modelType)
 
-    performanceDict = {}
     X = df.values
     y = utils.convert_Y(X[:, -1])
     columns = df.columns
@@ -119,9 +120,11 @@ def model(df, modelType, reportKey, normalize, paramGrid, dataFile, ROI, heurist
     elif modelType == "LR":
         clf = GridSearchCV(LogisticRegression(random_state=0), paramGrid)
     
-    output = Parallel(n_jobs=-1)(delayed(train)(clf, train_index, test_index, X, y, normalize, columns, performanceDict, modelType, reportKey, iteration) for iteration, (train_index, test_index) in enumerate(cv.split(X, y)))
+    output = Parallel(n_jobs=-1)(delayed(train)(clf, train_index, test_index, X, y, normalize, columns, modelType, reportKey, iteration) for iteration, (train_index, test_index) in enumerate(cv.split(X, y)))
+
+    performance.append(output)
 
     with open(f"{modelType}/{reportKey}_report.json", 'w', encoding='utf-8') as f:
-        json.dump(output, f, ensure_ascii=False, indent=4)
+        json.dump(performance, f, ensure_ascii=False, indent=4)
         
-    return performanceDict
+    return performance

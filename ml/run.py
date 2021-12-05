@@ -15,12 +15,10 @@ HEURISTIC = "combine"
 df = preprocess.get_data(DATA_FILE, ROI, HEURISTIC)
 
 models.svm(df, preprocess.normalize1, "norm1", DATA_FILE, ROI, heuristic="combine")
+models.svm(df, preprocess.normalize2, "norm2", DATA_FILE, ROI, heuristic="combine")
 
-# models.svm(df, preprocess.normalize1, "norm1", DATA_FILE, ROI, heuristic="combine")
-# models.svm(df, preprocess.normalize2, "norm2", DATA_FILE, ROI, heuristic="combine")
+models.logistic_regression(df, preprocess.normalize1, "norm1", DATA_FILE, ROI, heuristic="combine")
+models.logistic_regression(df, preprocess.normalize2, "norm2", DATA_FILE, ROI, heuristic="combine")
 
-# models.logistic_regression(df, preprocess.normalize1, "norm1", DATA_FILE, ROI, heuristic="combine")
-# models.logistic_regression(df, preprocess.normalize2, "norm2", DATA_FILE, ROI, heuristic="combine")
-
-# models.random_forest(df, preprocess.normalize1, "norm1", DATA_FILE, ROI, heuristic="combine")
-# models.random_forest(df, preprocess.normalize2, "norm2", DATA_FILE, ROI, heuristic="combine")
+models.random_forest(df, preprocess.normalize1, "norm1", DATA_FILE, ROI, heuristic="combine")
+models.random_forest(df, preprocess.normalize2, "norm2", DATA_FILE, ROI, heuristic="combine")
