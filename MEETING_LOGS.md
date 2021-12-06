@@ -116,3 +116,23 @@ ROI's available from FreeSurfer
 - CC_Central
 - CC_Mid_Anterior
 - CC_Anterior
+
+
+Mapping missing to FS
+-------------------------------
+
+- Midbrain : not seen in FreeSurfer list above, but see 1. below 
+- Pons : not seen in FreeSurfer list above but see 1. below 
+- Posterior putamen :  Right-Putamen + Left-Putamen as a proxy (it will include anterior Putamen)
+- SCP : Superior Cerebellar Pedoncule :not seen in FreeSurfer list above, but see 1. below 
+- Insula : not seen in FS list, but see 2. below 
+- Precentral cortex : not seen in FS list, but see 2. below
+- Insular cortex : not seen in FS list, but see 2. below  
+
+1. For regions like Pons, Midbrain, SCP, see: 
+[FS Wiki ](https://surfer.nmr.mgh.harvard.edu/fswiki/BrainstemSubstructures)
+
+2. For regions like Precentral / Insula, see
+[FS Wiki](https://surfer.nmr.mgh.harvard.edu/fswiki/CorticalParcellation)
+
+These regions in 1. and 2. are not seen after segmentation ? 
