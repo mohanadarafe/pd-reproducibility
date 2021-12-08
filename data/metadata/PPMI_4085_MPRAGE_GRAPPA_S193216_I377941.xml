@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<idaxs xmlns="http://ida.loni.usc.edu" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="/xsds/idaxs_2_0.xsd">
+<project xmlns="">
+ <projectIdentifier>PPMI</projectIdentifier>
+ <projectDescription>Parkinson&#039;s Progression Markers Initiative</projectDescription>
+ <siteKey>304</siteKey>
+ <subject>
+  <subjectIdentifier>4085</subjectIdentifier>
+  <researchGroup>Control</researchGroup>
+  <subjectSex>M</subjectSex>
+  <visit>
+   <visitIdentifier>Baseline</visitIdentifier>
+   <assessment name="GDSCALE">
+    <component name="GDS Total Score">
+     <assessmentScore attribute="GDTOTAL">1.0</assessmentScore>
+    </component>
+   </assessment>
+  </visit>
+  <study>
+   <studyIdentifier>59384</studyIdentifier>
+   <subjectAge>66.66</subjectAge>
+   <ageQualifier>Y</ageQualifier>
+   <weightKg>80.0</weightKg>
+   <postMortem>F</postMortem>
+   <series>
+    <seriesIdentifier>193216</seriesIdentifier>
+    <modality>MRI</modality>
+    <dateAcquired>2013-04-08</dateAcquired>
+   </series>
+   <imagingProtocol>
+    <imageUID>377941</imageUID>
+    <description>MPRAGE GRAPPA</description>
+    <protocolTerm>
+     <protocol term="Acquisition Type">3D</protocol>
+     <protocol term="Weighting">T1</protocol>
+     <protocol term="Pulse Sequence">GR/IR</protocol>
+     <protocol term="Slice Thickness">1.0</protocol>
+     <protocol term="TE">2.98</protocol>
+     <protocol term="TR">2300.0</protocol>
+     <protocol term="TI">900.0</protocol>
+     <protocol term="Coil">Body</protocol>
+     <protocol term="Flip Angle">9.0</protocol>
+     <protocol term="Acquisition Plane">SAGITTAL</protocol>
+     <protocol term="Matrix X">240.0</protocol>
+     <protocol term="Matrix Y">256.0</protocol>
+     <protocol term="Matrix Z">176.0</protocol>
+     <protocol term="Pixel Spacing X">1.0</protocol>
+     <protocol term="Pixel Spacing Y">1.0</protocol>
+     <protocol term="Manufacturer">SIEMENS</protocol>
+     <protocol term="Mfg Model">Verio</protocol>
+     <protocol term="Field Strength">3.0</protocol>
+    </protocolTerm>
+   </imagingProtocol>
+  </study>
+ </subject>
+</project>
+</idaxs>
