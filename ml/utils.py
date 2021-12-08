@@ -50,10 +50,16 @@ def convert_Y(data):
     data = np.where(data == "NC", 0, data)
     return data.astype(int)
 
-def get_mean_and_stats(df, scannerType):
+def get_mean_and_stats(df, scannerType, numOfFeatures):
     queryDf = df.loc[((df['scannerType'] == scannerType) & (df['class']  == 'NC'))]
-    mean = queryDf.mean()
-    std = queryDf.std()
+
+    if queryDf.shape[0] > 1:
+        mean = queryDf.mean()
+        std = queryDf.std()
+    else:
+        mean = pd.Series(np.zeros(numOfFeatures,))
+        std = pd.Series(np.ones(numOfFeatures,))
+
     return mean, std
 
 def parse_metadata():

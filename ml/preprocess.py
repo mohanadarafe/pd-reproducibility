@@ -42,16 +42,16 @@ def normalize1(df, mean, std):
 def normalize2(df):
     df_no_id = df.drop(columns=["subjectId", "class"])
     metadata_df = utils.parse_metadata()
-    merged_df = pd.merge(df, metadata_df, on=["subjectId"])
-    
+    merged_df = pd.merge(df, metadata_df, on=["subjectId"], how="left")
+   
     stats = {}
-    for scanner in merged_df["scannerType"].unique():
-        mean, std = utils.get_mean_and_stats(merged_df.drop(columns="subjectId"), scanner)
+    for scanner in merged_df["scannerType"].dropna().unique():
+        mean, std = utils.get_mean_and_stats(merged_df.drop(columns="subjectId"), scanner, df_no_id.shape[1])
         stats[scanner] = {
             "mean": mean.to_dict(),
             "std": std.to_dict()
         }
-        
+
     for index in merged_df.index:
         rowInfo = merged_df.iloc[index]
         scanner = rowInfo["scannerType"]
@@ -59,7 +59,7 @@ def normalize2(df):
         std = list(stats[scanner]["std"].values())
         df_no_id.iloc[index] = (df_no_id.iloc[index]-mean)/std
         
-    return df_no_id.values
+    return df_no_id
 
 def train(clf, train_index, test_index, X, y, normalize, columns, modelType, reportKey, iteration):
     print(f"=================Iteration #{iteration}=================")
@@ -110,7 +110,7 @@ def model(df, modelType, reportKey, normalize, paramGrid, dataFile, ROI, heurist
     columns = df.columns
     
     # Setup CV
-    cv = RepeatedStratifiedKFold(n_splits=2, n_repeats=3, random_state=42)
+    cv = RepeatedStratifiedKFold(n_splits=5, n_repeats=50, random_state=42)
 
     # Define model type
     if modelType == "SVM":

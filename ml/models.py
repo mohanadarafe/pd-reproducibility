@@ -12,7 +12,7 @@ def svm(df, normalize, normType, dataFile, ROI, heuristic=None):
 
 def logistic_regression(df, normalize, normType, dataFile, ROI, heuristic=None):
     param_grid = {
-        'penalty': ["l1", "l2", "elasticnet"],
+        'solver': ["newton-cg", "lbfgs", "liblinear", "sag", "saga"],
         'C': [1.0, 10.0, 100.0, 1000.0]
     }
     preprocess.model(df, "LR", f"lr_{normType}", normalize, param_grid, dataFile, ROI, heuristic="combine")
