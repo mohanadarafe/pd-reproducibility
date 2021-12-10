@@ -6,4 +6,3 @@ data/json_input
 data/subjects
 __pycache__
 license.txt
-*.xml

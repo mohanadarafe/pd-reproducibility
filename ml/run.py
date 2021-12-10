@@ -7,8 +7,10 @@ ROI = [
       "Right-Caudate", "Left-Caudate", 
       "Right-Thalamus-Proper", "Left-Thalamus-Proper", 
       "Left-Pallidum", "Right-Pallidum", 
-      "CerebralWhiteMatterVol", 
-      "3rd-Ventricle", "4th-Ventricle"
+      "Left-Cerebellum-White-Matter", "Right-Cerebellum-White-Matter", 
+      "Left-Cerebellum-Cortex", "Right-Cerebellum-Cortex",
+      "3rd-Ventricle", 
+      "4th-Ventricle"
 ]
 HEURISTIC = "combine"
 

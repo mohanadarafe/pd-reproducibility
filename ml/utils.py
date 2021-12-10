@@ -51,6 +51,9 @@ def convert_Y(data):
     return data.astype(int)
 
 def get_mean_and_stats(df, scannerType, numOfFeatures):
+    '''
+    Calculate mean and std for normalization 2
+    '''
     queryDf = df.loc[((df['scannerType'] == scannerType) & (df['class']  == 'NC'))]
 
     if queryDf.shape[0] > 1:
@@ -63,6 +66,9 @@ def get_mean_and_stats(df, scannerType, numOfFeatures):
     return mean, std
 
 def parse_metadata():
+    '''
+    Get DatFrame table consisting of two columns: subjectId and scannerType
+    '''
     df = pd.DataFrame(columns=["subjectId", "scannerType"])
     for index, mdFilePath in enumerate(glob.glob("../data/metadata/*")):
         with open(mdFilePath, "r") as file:
@@ -81,6 +87,9 @@ def parse_metadata():
     return df 
 
 def performance_report(model, modelType, reportKey, iteration, X_train, X_test, y_train, y_test):
+    '''
+    Produces JSON report after fitting model
+    '''
     performanceDict = {}
     y_train_predict = model.predict(X_train)
     y_test_predict = model.predict(X_test)
@@ -100,7 +109,6 @@ def performance_report(model, modelType, reportKey, iteration, X_train, X_test, 
     # ROC AUC
     train_auc = roc_auc_score(y_train, y_train_predict)
     test_auc = roc_auc_score(y_test, y_test_predict)
-#     roc_plot = plot_roc_curve(model, X_test, y_test).figure.savefig(f"{modelType}/roc.png")
 
     # Sensitivity & Specificity
     tn_train, fp_train, fn_train, tp_train = confusion_matrix(y_train, y_train_predict).ravel()

@@ -1,6 +1,5 @@
-# Parkinson Disease reproducibility
-The following project is dedicated to test methodological variability in early-Parkinson disease detection via Machine Learning.
-
+# Reproducing Automated Categorization of Parkinsonian Syndromes
+The reproducibility crisis is a methodological and sociological problem that refers to the growing evidence that scientific study results often cannot be reproduced. Therefore, government officials and scientists spend time and money generating inaccurate results that only minimize the chances of progressive work being done. This is a major concern for the biomedical community as it impacts the validity of results in a preclinical setting. Reproducibility, with respect to machine learning, means that running a computational model several times always produces the same results. However, data changes, software environments, software versions and numerous factors vary the output of a model. In this paper, reproducibility in Lydia Chougar’s Automated Categorization of Parkinsonian Syndromes Using Magnetic Resonance Imaging in a Clinical Setting will be asserted.
 
 ## Setup
 In order to run the code, make sure you have Conda installed in your machine in order to use our environment. From there, run the following commands
@@ -17,10 +16,13 @@ cd ml
 python run.py
 ```
 
-**Warning: this operation could take weeks to run if running on a single computer!**
+**Warning: this operation could take a long time!**
+
+## Notebook
+You can review the machine learning pipeline by accessing this [notebook](ml/ml-pipeline-notebook.ipynb)
 
 ## Meeting Notes
-The following log is dedicated to keep track of meetings & discussions from the authors of this project. They can be found [here](https://github.com/mohanadarafe/pd-reproducibility/blob/main/MEETING_LOGS.md).
+The following log is dedicated to keep track of meetings & discussions from the authors of this project. They can be found [here](/MEETING_LOGS.md).
 
 ### Credits
 | Name | Role |

@@ -30,6 +30,12 @@ def get_data(csvFileName: str, ROI: [], heuristic = None):
     return df
 
 def normalize1(df, mean, std):
+    '''
+    Implementation of normalization 1
+    @df: DataFrame of volumes
+    @mean: if test set, mean is predefined
+    @std: if test set, std is predefined
+    '''
     if mean is None and std is None:
         mean = df.mean(axis=0)
         std = df.std(axis=0)
@@ -40,6 +46,10 @@ def normalize1(df, mean, std):
     return normalizedDf.values
             
 def normalize2(df):
+    '''
+    Implementation of normalization 2
+    @df: DataFrame of volumes
+    '''
     df_no_id = df.drop(columns=["subjectId", "class"])
     metadata_df = utils.parse_metadata()
     merged_df = pd.merge(df, metadata_df, on=["subjectId"], how="left")
@@ -62,6 +72,9 @@ def normalize2(df):
     return df_no_id
 
 def train(clf, train_index, test_index, X, y, normalize, columns, modelType, reportKey, iteration):
+    '''
+    Parallelized training
+    '''
     print(f"=================Iteration #{iteration}=================")
     performanceDict = {}
         
@@ -99,6 +112,9 @@ def train(clf, train_index, test_index, X, y, normalize, columns, modelType, rep
     return performanceDict
 
 def model(df, modelType, reportKey, normalize, paramGrid, dataFile, ROI, heuristic=None):
+    '''
+    Generic model definition
+    '''
     print(f"\n======================Running {modelType} with the following parameters======================\nNormalization: {normalize.__name__}\nParam Grid: {paramGrid}\nData: {dataFile}\nROI: {ROI}")
 
     performance = []
