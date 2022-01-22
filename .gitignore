@@ -1,8 +1,0 @@
-data/NC
-data/PD
-data/*.csv
-scripts
-data/json_input
-data/subjects
-__pycache__
-license.txt

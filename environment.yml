@@ -2,14 +2,7 @@ name: env
 channel:
 - conda-forge
 dependencies:
-- python>=3.7
+- python=3.7
 - pandas
 - scikit-learn
 - matplotlib
-- joblib
-- selenium
-- beautifulsoup4
-- lxml
-- pip
-- pip:
-  - boutiques
