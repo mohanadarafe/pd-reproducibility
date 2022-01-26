@@ -22,6 +22,19 @@ def create_brainstem_stats(brainstemFile):
             f.write(f"{stats[key]}\t")
         f.write(f"{stats[keys[-1]]}")
 
+def create_cortical_stats(statsDirectory):
+    with open(f"{statsDirectory}/insula.txt", "r") as f:
+        lines = f.readlines()
+        insula_volume = int(lines[1].split()[1])
+
+    with open(f"{statsDirectory}/precentral.txt", "r") as f:
+        lines = f.readlines()
+        precentral_volume = int(lines[1].split()[1])
+    
+    d = {"Insula": [insula_volume], "Precentral Cortex": [precentral_volume]}
+    df = pd.DataFrame(d)
+    return df
+
 def convert_stats_to_csv(statsFile: str, outputCsvFile: str):
     '''
     Converts the aseg.stats file produced from recon-all to a CSV file
@@ -37,8 +50,11 @@ def create_csv(subjectDirectory, subIdDict):
     create_brainstem_stats(f"{subjectDirectory}/brainstemSsVolumes.v10.txt")
     brainstem_df = pd.read_csv("brainstem.csv", sep="\t")
 
+    # Convert cortical stats to CSV
+    cortical_df = create_cortical_stats(f"{subjectDirectory}")
+
     # Create DF
-    df = stats_df.join(brainstem_df)
+    df = stats_df.join([brainstem_df, cortical_df])
 
     # Convert CSV to DF and add subject ID column
     subject = subjectDirectory.split("/")[2]
