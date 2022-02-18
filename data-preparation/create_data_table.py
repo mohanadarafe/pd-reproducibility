@@ -69,7 +69,7 @@ def create_csv(subjectDirectory, subIdDict):
 
 if __name__ == '__main__':
     df_list = []
-    with open("data/subId.json") as f:
+    with open("data/ppmi-data/subId.json") as f:
         subIdDict = json.load(f)
 
     for subjectDirectory in glob.glob("data/fsstats/*"):
@@ -77,7 +77,7 @@ if __name__ == '__main__':
         df_list.append(df)
 
     volume_df = pd.concat(df_list, ignore_index=True).astype({"subjectId": np.int64})
-    baselineDf = pd.read_csv("data/baseline.csv")[["Subject Number", "Hoehn-&-Yahr"]] \
+    baselineDf = pd.read_csv("data/ppmi-data/baseline.csv")[["Subject Number", "Hoehn-&-Yahr"]] \
         .rename(columns={"Subject Number": "subjectId", "Hoehn-&-Yahr": "stage"})
     df = pd.merge(volume_df, baselineDf, on=["subjectId"], how="left")
-    df.to_csv("data/volumes.csv")
+    df.to_csv("data/freeSurferVolumes.csv")
