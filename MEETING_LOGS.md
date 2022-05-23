@@ -1,9 +1,9 @@
 # Meeting Notes
 The following log is dedicated to keep track of meetings & discussions from the authors of this project.
 
-## January 11th, 2022
-In this meeting, we discussed the potential scientific question we will ask for the thesis. The workflow will compromise of using Lydia Chougar's *Automated Categorization of Parkinsonian Syndromes Using Magnetic Resonance Imaging in a Clinical Setting* pipeline for predicting the progression of Parkinson's disease as per Zhen-Yu Shu's paper.
+## May 20th, 2022
+In this meeting, we discussed the progress on building a suitable cohort for the project. We used a new file introduced by Tristan to try and fetch more patients called `MDS_UPDRS_Part_III.csv` which was fetched from PPMI. However, we obtained less subjects and this did not work. This is due to the fact that we limited our data to patients with 3 year visit progression from baselines to month 36. 
 
-Additionally, JB suggested to do feature histograms in order to validate the output of FreeSurfer's volumes measured.
+For the next visit, we would like to develop an algorithm that will fetch patiens with 3 year visit gaps at any range. Therefore, the cohort will include patients from baseline to month 36 or from month 12 to month 48 and so on...
 
-The goal for next meeting is to advance on the ML pipeline.
+Also, we wanted to re-attempt to contact the authors of the original paper to see if we can understand from them how they constructed the cohort reported in the paper.
