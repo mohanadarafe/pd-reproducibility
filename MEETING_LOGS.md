@@ -7,3 +7,5 @@ In this meeting, we discussed the progress on building a suitable cohort for the
 For the next visit, we would like to develop an algorithm that will fetch patiens with 3 year visit gaps at any range. Therefore, the cohort will include patients from baseline to month 36 or from month 12 to month 48 and so on...
 
 Also, we wanted to re-attempt to contact the authors of the original paper to see if we can understand from them how they constructed the cohort reported in the paper.
+
+## May 24th, 2022

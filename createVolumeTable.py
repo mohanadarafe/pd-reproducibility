@@ -47,6 +47,7 @@ def create_cortical_stats(statsDirectory):
     return df
 
 if __name__ == '__main__':
+    initFreeSurfer()
     df_list = []
 
     for subjectDirectory in glob.glob("data/fsstats/*/*"):
